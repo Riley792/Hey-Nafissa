@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,8 @@
             justify-content: center;
             align-items: center;
             background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
-            background-color: #ffdde1; /* Fallback */
+            background-color: #ffdde1;
+            /* Fallback */
             background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow: hidden;
@@ -31,7 +33,7 @@
             font-size: 3.5rem;
             color: #d32f2f;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         p {
@@ -44,7 +46,7 @@
             width: 200px;
             border-radius: 15px;
             margin-bottom: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
 
         .btn-group {
@@ -53,7 +55,8 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            min-height: 60px; /* Space for buttons */
+            min-height: 60px;
+            /* Space for buttons */
         }
 
         button {
@@ -80,8 +83,9 @@
         #no-btn {
             background-color: #fff;
             color: #ff4081;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            position: absolute; /* Allows it to move freely */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            /* Allows it to move freely */
         }
 
         /* Success Message State */
@@ -100,22 +104,33 @@
         }
 
         @keyframes float {
-            0% { transform: translateY(100vh) scale(0.5); opacity: 0; }
-            50% { opacity: 0.8; }
-            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
-        }
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
 
+            50% {
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: translateY(-10vh) scale(1.5);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
+
 <body>
 
     <div id="hearts-container"></div>
 
     <div class="container" id="main-card">
         <div class="gif-container">
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2a2n5cWw0NWlnbzVlLCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif" alt="Cute Bear">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDdtZ2JiZDR0a3lvMWF4OG8yc3p6Ymdvd3g2a2n5cWw0NWlnbzVlLCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/cLS1cfxvGOPVpf9g3y/giphy.gif"
+                alt="Cute Bear">
         </div>
-        
+
         <h1>Nafissa, Will you be my Valentine?</h1>
         <p>I really, really hope you say yes! 🌹</p>
 
@@ -135,7 +150,7 @@
 
     <script>
         /* --- JAVASCRIPT LOGIC --- */
-        
+
         const yesBtn = document.getElementById('yes-btn');
         const noBtn = document.getElementById('no-btn');
         const mainCard = document.getElementById('main-card');
@@ -150,7 +165,7 @@
             // Get window dimensions
             const windowWidth = window.innerWidth;
             const windowHeight = window.innerHeight;
-            
+
             // Get button dimensions
             const btnWidth = noBtn.offsetWidth;
             const btnHeight = noBtn.offsetHeight;
@@ -166,10 +181,18 @@
         }
 
         // Logic for "Yes" button
+        // Logic for "Yes" button
         yesBtn.addEventListener('click', () => {
             mainCard.style.display = 'none';
             successCard.style.display = 'flex';
             createConfetti();
+
+            // Silently send you an email
+            fetch("https://formspree.io/f/xdalkkpp", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: "She said YES!" })
+            });
         });
 
         // Background Hearts Generator
@@ -180,7 +203,7 @@
             heart.style.left = Math.random() * 100 + 'vw';
             heart.style.fontSize = Math.random() * 20 + 20 + 'px';
             heart.style.animationDuration = Math.random() * 3 + 3 + 's'; // 3-6s
-            
+
             heartsContainer.appendChild(heart);
 
             // Remove heart after animation
@@ -194,10 +217,11 @@
         // Simple Confetti Effect
         function createConfetti() {
             // Just bursts more hearts for the celebration
-            for(let i=0; i<50; i++) {
+            for (let i = 0; i < 50; i++) {
                 setTimeout(createHeart, i * 50);
             }
         }
     </script>
 </body>
+
 </html>
